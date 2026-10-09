@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
+
+# Environment secrets — never commit these
+.env
+
+# Uploaded documents (user data, can be large)
+backend/uploads/
+
+# Portable PostgreSQL (binaries + data + downloaded zips) — only pg.ps1 is tracked
+tools/pgsql/
+tools/pgdata/
+tools/pgvector/
+tools/*.zip
+
+# Node / React
+frontend/node_modules/
+frontend/dist/
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

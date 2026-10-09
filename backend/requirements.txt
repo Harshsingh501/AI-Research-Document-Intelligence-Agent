@@ -1,0 +1,27 @@
+# --- Web framework ---
+fastapi==0.115.6            # async web framework; auto-generates OpenAPI docs at /docs
+uvicorn[standard]==0.34.0   # ASGI server that actually runs FastAPI
+python-multipart==0.0.20    # required by FastAPI for file uploads (multipart/form-data)
+
+# --- Validation & settings ---
+pydantic==2.10.4            # data validation; defines request/response schemas
+pydantic-settings==2.7.1    # loads config from .env into a typed Settings class
+
+# --- Database ---
+sqlalchemy[asyncio]==2.0.36 # ORM with async support
+asyncpg==0.30.0             # fast async Postgres driver that SQLAlchemy uses under the hood
+pgvector==0.3.6             # adds the Vector column type to SQLAlchemy
+alembic==1.14.0             # database migrations (versioned schema changes)
+
+# --- LLM & embeddings ---
+ollama==0.4.5               # client for the local Ollama server (chat, embeddings, tool calling)
+
+# --- Document processing ---
+pypdf==5.1.0                # extract text from PDFs
+
+# --- Dev / testing ---
+pytest==8.3.4
+pytest-asyncio==0.25.0
+httpx>=0.27                 # async HTTP client; also used by FastAPI's TestClient
+                            # (unpinned: the ollama package constrains its version)
+aiofiles==24.1.0            # async file I/O for streaming uploads to disk

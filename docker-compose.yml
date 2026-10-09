@@ -1,0 +1,33 @@
+# Runs PostgreSQL with the pgvector extension pre-installed.
+#
+# pgvector adds a `vector` column type and similarity operators (<=> for cosine
+# distance) to Postgres, so we can store embeddings and do nearest-neighbour
+# search with plain SQL — no separate vector database needed.
+#
+# Usage:
+#   docker compose up -d      # start in the background
+#   docker compose down       # stop (data is kept in the volume)
+#   docker compose down -v    # stop AND wipe all data
+
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    container_name: docintel_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: docintel
+      POSTGRES_PASSWORD: docintel
+      POSTGRES_DB: docintel
+    ports:
+      - "5432:5432"
+    volumes:
+      # Named volume so data survives container restarts
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U docintel -d docintel"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  pgdata:
